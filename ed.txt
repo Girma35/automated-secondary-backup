@@ -1,0 +1,22 @@
+#!/bin/bash
+
+read -p "Enter the path for the new script (including .sh extension): " script_path
+
+# Check if the path is empty
+if [[ -z "$script_path" ]]; then
+  echo "Error: Path cannot be empty." >&2
+  exit 1
+fi
+
+# Check if the path has the .sh extension.  If not, add it.
+if [[ ! "$script_path" == *.sh ]]; then  # * is a wildcard. This checks that the path ends in .sh
+  script_path="$script_path.sh"
+fi
+
+# Write the shebang and make it executable
+echo "#!/bin/bash" > "$script_path"
+chmod +x "$script_path"
+
+echo "Script created and made executable at: $script_path"
+
+exit 0
